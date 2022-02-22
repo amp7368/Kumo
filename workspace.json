@@ -1,7 +1,9 @@
 {
-  "version": 2,
-  "projects": {
-    "website": "apps/website",
-    "website-e2e": "apps/website-e2e"
-  }
+    "version": 2,
+    "projects": {
+        "website": "apps/website",
+        "api-iomodel": "libs/api-iomodel",
+        "element-lib": "libs/element-lib",
+        "misc-for-now": "libs/misc-for-now"
+    }
 }
