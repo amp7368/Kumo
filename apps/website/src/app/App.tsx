@@ -1,14 +1,9 @@
 import { BrowserRouter, Routes } from 'react-router-dom';
-import { RouteInfo } from './routes/RouteInfo';
-import { AllRoutesList } from './routes/routes';
+
+import { AllRoutes } from './routes/routes';
 
 function App() {
-    const routes: JSX.Element[] = [];
-    let route: RouteInfo;
-    let i = 0;
-    for (route of AllRoutesList) {
-        routes.push(route.toRoute({ key: i++ }));
-    }
+    const routes = Object.values(AllRoutes).map((route) => route.renderRoute());
     return (
         <BrowserRouter>
             <Routes>{routes}</Routes>

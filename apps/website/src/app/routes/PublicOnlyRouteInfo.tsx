@@ -7,7 +7,7 @@ export class PublicOnlyRouteInfo extends RestrictedRouteInfo {
             // if you're logged in, don't log in again
             return <Navigate to={'/profile'} replace={true} />;
         } else {
-            return this.page.renderElement();
+            return this.renderPage();
         }
     }
 }

@@ -2,31 +2,27 @@ import { Route } from 'react-router-dom';
 import { PageWrapperProps } from './routeProps';
 
 export interface IPageWrapper {
-    renderElement(): JSX.Element;
-}
-
-export interface ToRouteProps {
-    key: number;
+    props: PageWrapperProps;
+    PageElement(): JSX.Element;
 }
 
 export class RouteInfo {
     props: PageWrapperProps;
     page: IPageWrapper;
-    constructor(props: PageWrapperProps, page: IPageWrapper) {
-        this.props = props;
+    constructor(page: IPageWrapper) {
+        this.props = page.props;
         this.page = page;
-        this.toRoute = this.toRoute.bind(this);
+        this.renderRoute = this.renderRoute.bind(this);
     }
-    public getName() {
+    getName(): string {
         return this.props.title;
     }
-    public toRoute(toRouteProps: ToRouteProps): JSX.Element {
+    renderRoute(): JSX.Element {
         return (
-            <Route
-                key={toRouteProps.key}
-                path={this.props.link}
-                element={this.page.renderElement()}
-            />
+            <Route path={this.props.link} element={this.page.PageElement()} />
         );
+    }
+    renderPage(): JSX.Element {
+        return <this.page.PageElement />;
     }
 }

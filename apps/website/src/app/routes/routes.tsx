@@ -1,33 +1,25 @@
-import AuthPage from '../components/pages/auth/AuthPage';
-import CataloguePage from '../components/pages/catalogue/CataloguePage';
-import HomePage from '../components/pages/home/HomePage';
-import ProfilePage from '../components/pages/profile/ProfilePage';
-import { PrivateRouteInfo } from './PrivateRouteInfo';
-import { PublicOnlyRouteInfo } from './PublicOnlyRouteInfo';
+import { HomePage } from '../components/pages/home/HomePage';
 import { RouteInfo } from './RouteInfo';
-import { AllRouteProps } from './routeProps';
+import { PageId, PageWrapperProps } from './routeProps';
 
-export const AllRoutes = {
-    HomeRoute: new RouteInfo(
-        AllRouteProps.HomeProps,
-        new HomePage(AllRouteProps.HomeProps)
-    ),
-    CatalogueRoute: new RouteInfo(
-        AllRouteProps.CatalogueProps,
-        new CataloguePage(AllRouteProps.CatalogueProps)
-    ),
-    ProfileRoute: new PrivateRouteInfo(
-        AllRouteProps.ProfileProps,
-        new ProfilePage(AllRouteProps.ProfileProps)
-    ),
-    AuthRoute: new PublicOnlyRouteInfo(
-        AllRouteProps.AuthProps,
-        new AuthPage(AllRouteProps.AuthProps)
-    ),
+function createProps(
+    pageType: PageId,
+    title: string,
+    link: string
+): PageWrapperProps {
+    return {
+        pageType: pageType,
+        title: title,
+        link: link,
+    } as PageWrapperProps;
+}
+export const AllRoutes: Record<string, RouteInfo> = {
+    HomeRoute: new HomePage(
+        createProps(PageId.Home, 'Home', '/')
+    ).createRoute(),
 };
-export const AllRoutesList: RouteInfo[] = [
-    AllRoutes.HomeRoute,
-    AllRoutes.CatalogueRoute,
-    AllRoutes.ProfileRoute,
-    AllRoutes.AuthRoute,
-];
+
+export const AllRouteProps = {
+    ProfileProps: createProps(PageId.Profile, 'Profile', '/profile'),
+    AuthProps: createProps(PageId.Auth, 'Authentication', '/auth'),
+};
