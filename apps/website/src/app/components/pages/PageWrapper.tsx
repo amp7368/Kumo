@@ -1,5 +1,5 @@
 import { PropsJustChildren } from '@appleptr16/elemental';
-import { Box, ThemeProvider } from '@mui/material';
+import { Box, Container, ThemeProvider } from '@mui/material';
 import { ReactNode } from 'react';
 
 import { IPageWrapper, RouteInfo } from '../../routes/RouteInfo';
@@ -8,8 +8,11 @@ import { TopNavigation } from '../common/nav/top/TopNavigation';
 import { appTheme } from '../ThemeManager';
 
 const StyledRoot = (props: PropsJustChildren) => (
-    <Box sx={{ color: 'primary' }}>{props.children}</Box>
+    <Box color={'primary'}>{props.children}</Box>
 );
+const StyledContentRoot = (props: PropsJustChildren) => {
+    return <Container sx={{ color: 'primary' }}>{props.children}</Container>;
+};
 export abstract class PageWrapper implements IPageWrapper {
     props: PageWrapperProps;
     constructor(props: PageWrapperProps) {
@@ -27,12 +30,12 @@ export abstract class PageWrapper implements IPageWrapper {
             <ThemeProvider theme={appTheme}>
                 <StyledRoot>
                     <TopNavigation />
-                    {this.renderMainPage()}
-                    {this.sideBar()}
+                    <StyledContentRoot>
+                        {this.renderMainPage()}
+                    </StyledContentRoot>
                 </StyledRoot>
             </ThemeProvider>
         );
     }
     abstract renderMainPage(): ReactNode;
-    abstract sideBar(): ReactNode;
 }

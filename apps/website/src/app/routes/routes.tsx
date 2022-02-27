@@ -1,3 +1,4 @@
+import { DesignPage } from '../components/pages/design/DesignPage';
 import { HomePage } from '../components/pages/home/HomePage';
 import { RouteInfo } from './RouteInfo';
 import { PageId, PageWrapperProps } from './routeProps';
@@ -13,13 +14,16 @@ function createProps(
         link: link,
     } as PageWrapperProps;
 }
-export const AllRoutes: Record<string, RouteInfo> = {
+export const AllRoutes = {
     HomeRoute: new HomePage(
         createProps(PageId.Home, 'Home', '/')
     ).createRoute(),
+    DesignRoute: new DesignPage(
+        createProps(PageId.Design, 'Design', '/design')
+    ).createRoute(),
 };
 
-export const AllRouteProps = {
+const AllRouteProps = {
     ProfileProps: createProps(PageId.Profile, 'Profile', '/profile'),
     AuthProps: createProps(PageId.Auth, 'Authentication', '/auth'),
 };

@@ -4,14 +4,11 @@ import { RouteInfo } from '../../../routes/RouteInfo';
 import { PageWrapper } from '../PageWrapper';
 
 export class HomePage extends PageWrapper {
-    createRoute(): RouteInfo {
+    override createRoute(): RouteInfo {
         return new RouteInfo(this);
     }
 
-    renderMainPage(): ReactNode {
+    override renderMainPage(): ReactNode {
         return <h1>Main Page</h1>;
-    }
-    sideBar(): ReactNode {
-        return <h2>sidebar</h2>;
     }
 }

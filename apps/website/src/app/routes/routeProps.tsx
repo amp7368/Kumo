@@ -8,4 +8,5 @@ export enum PageId {
     Home = 'Home',
     Profile = 'Profile',
     Auth = 'Auth',
+    Design = 'Design',
 }
