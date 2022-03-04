@@ -1,6 +1,7 @@
 import { Store, StoreConfig } from '@datorama/akita';
 
 export interface SessionState {
+    userId?: number;
     sessionToken?: string;
     lastRefresh: number;
 }

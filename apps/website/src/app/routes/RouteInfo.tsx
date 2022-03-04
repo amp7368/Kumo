@@ -17,9 +17,13 @@ export class RouteInfo {
     getName(): string {
         return this.props.title;
     }
-    renderRoute(): JSX.Element {
+    renderRoute(i: number): JSX.Element {
         return (
-            <Route path={this.props.link} element={this.page.PageElement()} />
+            <Route
+                key={i}
+                path={this.props.link}
+                element={this.page.PageElement()}
+            />
         );
     }
     renderPage(): JSX.Element {

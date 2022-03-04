@@ -16,12 +16,14 @@ function AppBarLink({ route }: { route: RouteInfo }): JSX.Element {
     );
 }
 export const TopNavigation = () => {
-    const buttons = [AllRoutes.HomeRoute, AllRoutes.DesignRoute].map(
-        (route) => <AppBarLink route={route} />
-    );
+    const buttons = [
+        AllRoutes.HomeRoute,
+        AllRoutes.DesignRoute,
+        AllRoutes.ProfileRoute,
+    ].map((route, i) => <AppBarLink key={i} route={route} />);
     return (
         <Box display={'inline-block'}>
-            <AppBar variant="outlined">
+            <AppBar>
                 <Stack direction="row">{buttons}</Stack>
             </AppBar>
         </Box>

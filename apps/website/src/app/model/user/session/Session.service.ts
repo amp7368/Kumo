@@ -1,4 +1,10 @@
-import { RequestLogin, RequestSignup, ResponseAuth, ResponseLogin, ResponseSignup } from '@api/io-model';
+import {
+    RequestLogin,
+    RequestSignup,
+    ResponseAuth,
+    ResponseLogin,
+    ResponseSignup,
+} from '@api/io-model';
 import { runnableEmpty } from '@misc/for-now';
 
 import { AuthAPI, authAPI } from '../../../api/auth/AuthApi';
@@ -18,6 +24,7 @@ export class SessionService {
         this.store.update((state: SessionState) => ({
             ...state,
             sessionToken: undefined,
+            userId: undefined,
             lastRefresh: 0,
         }));
     }
@@ -27,15 +34,25 @@ export class SessionService {
         return signupResponse;
     }
     async login(credentials: RequestLogin): Promise<ResponseLogin> {
-        const loginResponse = this.authApi.login(credentials);
+        const loginResponse: Promise<ResponseLogin> =
+            this.authApi.login(credentials);
         loginResponse.then(this.authPost).catch(runnableEmpty);
         return loginResponse;
     }
     private authPost(session: ResponseAuth) {
-        console.log(session.sessionToken);
-        const lastRefresh = session.sessionToken ? Date.now() : 0;
+        let lastRefresh: number;
+        let userId: number | undefined;
+        if (session.sessionToken) {
+            lastRefresh = Date.now();
+            userId = session.userId;
+        } else {
+            lastRefresh = 0;
+            userId = undefined;
+        }
+
         this.store.update((state) => ({
             ...state,
+            userId: userId,
             sessionToken: session.sessionToken,
             lastRefresh: lastRefresh,
         }));

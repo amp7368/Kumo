@@ -23,5 +23,8 @@ export class SessionQuery extends Query<SessionState> {
     sessionToken: Observable<string | undefined> = this.session.pipe(
         map((sess: SessionState) => sess.sessionToken)
     );
+    userId: Observable<number | undefined> = this.session.pipe(
+        map((sess: SessionState) => sess.userId)
+    );
 }
 export const sessionQuery = new SessionQuery(sessionStore);
