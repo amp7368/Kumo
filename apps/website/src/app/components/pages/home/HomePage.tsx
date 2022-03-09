@@ -8,7 +8,7 @@ export class HomePage extends PageWrapper {
         return new RouteInfo(this);
     }
 
-    override renderMainPage(): ReactNode {
+    override renderMainPage(): JSX.Element {
         return <h1>Main Page</h1>;
     }
 }

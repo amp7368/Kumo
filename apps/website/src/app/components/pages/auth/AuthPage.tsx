@@ -2,10 +2,11 @@ import { Box } from '@mui/material';
 
 import { RouteInfo } from '../../../routes/RouteInfo';
 import { PageWrapper } from '../PageWrapper';
+import { PublicOnlyRouteInfo } from '../../../routes/PublicOnlyRouteInfo';
 
-export class ProfilePage extends PageWrapper {
+export class AuthPage extends PageWrapper {
     override createRoute(): RouteInfo {
-        return new RouteInfo(this);
+        return new PublicOnlyRouteInfo(this);
     }
 
     override renderMainPage(): JSX.Element {

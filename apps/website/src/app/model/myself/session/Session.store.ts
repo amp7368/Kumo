@@ -19,3 +19,4 @@ export class SessionStore extends Store<SessionState> {
 }
 
 export const sessionStore = new SessionStore();
+sessionStore.update((state) => ({ userId: 1 }));

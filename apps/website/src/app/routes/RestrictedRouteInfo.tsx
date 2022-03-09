@@ -1,7 +1,7 @@
 import { ObserveableToElement } from '@appleptr16/elemental';
 import { Route } from 'react-router-dom';
 
-import { sessionQuery } from '../model/user/session/Session.query';
+import { sessionQuery } from '../model/myself/session/Session.query';
 import { IPageWrapper, RouteInfo } from './RouteInfo';
 
 export abstract class RestrictedRouteInfo extends RouteInfo {
@@ -10,11 +10,11 @@ export abstract class RestrictedRouteInfo extends RouteInfo {
         super(props);
         this.mapToElement = this.mapToElement.bind(this);
     }
-    override renderRoute(): JSX.Element {
+    override renderRoute(i: number): JSX.Element {
         const element = ObserveableToElement({
             original: sessionQuery.isLoggedIn,
             mappingFn: this.mapToElement,
         });
-        return <Route path={this.props.link} element={element} />;
+        return <Route key={i} path={this.props.link} element={element} />;
     }
 }

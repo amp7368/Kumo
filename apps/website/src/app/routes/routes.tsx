@@ -1,3 +1,4 @@
+import { AuthPage } from '../components/pages/auth/AuthPage';
 import { DesignPage } from '../components/pages/design/DesignPage';
 import { HomePage } from '../components/pages/home/HomePage';
 import { ProfilePage } from '../components/pages/profile/ProfilePage';
@@ -9,11 +10,7 @@ function createProps(
     title: string,
     link: string
 ): PageWrapperProps {
-    return {
-        pageType: pageType,
-        title: title,
-        link: link,
-    } as PageWrapperProps;
+    return { pageType, title, link } as PageWrapperProps;
 }
 export const AllRoutes = {
     HomeRoute: new HomePage(
@@ -25,8 +22,7 @@ export const AllRoutes = {
     ProfileRoute: new ProfilePage(
         createProps(PageId.Profile, 'Profile', '/profile')
     ).createRoute(),
-};
-
-const AllRouteProps = {
-    AuthProps: createProps(PageId.Auth, 'Authentication', '/auth'),
+    AuthRoute: new AuthPage(
+        createProps(PageId.Auth, 'Authentication', '/auth')
+    ).createRoute(),
 };

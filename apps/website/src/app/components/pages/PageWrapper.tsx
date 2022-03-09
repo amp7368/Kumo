@@ -1,41 +1,29 @@
 import { PropsJustChildren } from '@appleptr16/elemental';
-import { Box, Container, ThemeProvider } from '@mui/material';
-import { ReactNode } from 'react';
+import { Box } from '@mui/material';
 
 import { IPageWrapper, RouteInfo } from '../../routes/RouteInfo';
 import { PageWrapperProps } from '../../routes/routeProps';
 import { TopNavigation } from '../common/nav/top/TopNavigation';
-import { appTheme } from '../ThemeManager';
 
-const StyledRoot = (props: PropsJustChildren) => (
-    <Box color={'primary'}>{props.children}</Box>
-);
-const StyledContentRoot = (props: PropsJustChildren) => {
-    return <Container sx={{ color: 'primary' }}>{props.children}</Container>;
+const StyleRootPage = (props: PropsJustChildren) => {
+    return <Box sx={{ color: 'primary', padding: 2 }}>{props.children}</Box>;
 };
 export abstract class PageWrapper implements IPageWrapper {
-    props: PageWrapperProps;
-    constructor(props: PageWrapperProps) {
-        this.props = props;
-    }
-
+    constructor(public props: PageWrapperProps) {}
     public getName(): string {
         return this.props.title;
     }
-
     abstract createRoute(): RouteInfo;
 
     PageElement(): JSX.Element {
         return (
-            <ThemeProvider theme={appTheme}>
-                <StyledRoot>
-                    <TopNavigation />
-                    <StyledContentRoot>
-                        {this.renderMainPage()}
-                    </StyledContentRoot>
-                </StyledRoot>
-            </ThemeProvider>
+            <>
+                <TopNavigation />
+                <StyleRootPage>
+                    <this.renderMainPage />
+                </StyleRootPage>
+            </>
         );
     }
-    abstract renderMainPage(): ReactNode;
+    abstract renderMainPage(): JSX.Element;
 }

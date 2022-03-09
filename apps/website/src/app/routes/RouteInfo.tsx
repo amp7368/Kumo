@@ -19,14 +19,10 @@ export class RouteInfo {
     }
     renderRoute(i: number): JSX.Element {
         return (
-            <Route
-                key={i}
-                path={this.props.link}
-                element={this.page.PageElement()}
-            />
+            <Route key={i} path={this.props.link} element={this.renderPage()} />
         );
     }
     renderPage(): JSX.Element {
-        return <this.page.PageElement />;
+        return this.page.PageElement();
     }
 }

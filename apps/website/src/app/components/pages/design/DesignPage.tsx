@@ -1,27 +1,31 @@
-import { Box, Stack } from '@mui/material';
-import { ReactNode } from 'react';
-
 import { RouteInfo } from '../../../routes/RouteInfo';
+import { appQueryParams } from '../../../util/AppQueryParams';
 import { PageWrapper } from '../PageWrapper';
-import { DesignEditor } from './editor/DesignEditor';
-import { DesignPreview } from './DesignPreview';
-import { DesignToolbox } from './DesignToolbox';
+import { DesignDefaultPage } from './default/DesignDefaultPage';
+import { huntQuery } from '../../../model/hunt/Hunt.query';
+import { HuntEditor } from './editor/HuntEditor';
+import { ObserveableToElement } from '@appleptr16/elemental';
+import { Optional } from '@misc/for-now';
+import { Hunt } from '../../../model/hunt/Hunt.model';
 
-function resizeBox(size: string, element: ReactNode) {
-    return <Box width={size}>{element}</Box>;
+function mapToPage(hunt: Optional<Hunt>) {
+    return hunt ? <HuntEditor hunt={hunt} /> : <DesignDefaultPage />;
 }
 export class DesignPage extends PageWrapper {
     override createRoute(): RouteInfo {
         return new RouteInfo(this);
     }
 
-    override renderMainPage(): ReactNode {
+    override renderMainPage(): JSX.Element {
+        const queryHunt: string = appQueryParams().getQueryHunt() ?? '';
+        console.log(queryHunt);
+        const huntObsv = huntQuery.selectEntity(queryHunt);
+
+        huntObsv.subscribe((et) => {
+            console.log('emit' + et);
+        });
         return (
-            <Stack direction="column">
-                {resizeBox('25%', <DesignToolbox />)}
-                {resizeBox('40%', <DesignEditor />)}
-                {resizeBox('25%', <DesignPreview />)}
-            </Stack>
+            <ObserveableToElement original={huntObsv} mappingFn={mapToPage} />
         );
     }
 }

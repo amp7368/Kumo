@@ -1,6 +1,4 @@
-import { PropsJustChildren } from '@appleptr16/elemental';
 import { AppBar, Button, Stack, Typography } from '@mui/material';
-import { Box } from '@mui/material';
 
 import { RouteInfo } from '../../../../routes/RouteInfo';
 import { AllRoutes } from '../../../../routes/routes';
@@ -8,24 +6,25 @@ import { AllRoutes } from '../../../../routes/routes';
 function AppBarLink({ route }: { route: RouteInfo }): JSX.Element {
     const changeRoute = () => window.location.replace(route.props.link);
     return (
-        <Button color="secondary" variant="text" onClick={changeRoute}>
-            <Typography color="primary.contrastText">
+        <Button variant="text" onClick={changeRoute}>
+            <Typography variant="h4" color="primary.contrastText">
                 {route.getName()}
             </Typography>
         </Button>
     );
 }
-export const TopNavigation = () => {
+export function TopNavigation() {
     const buttons = [
         AllRoutes.HomeRoute,
         AllRoutes.DesignRoute,
         AllRoutes.ProfileRoute,
+        AllRoutes.AuthRoute,
     ].map((route, i) => <AppBarLink key={i} route={route} />);
     return (
-        <Box display={'inline-block'}>
-            <AppBar>
-                <Stack direction="row">{buttons}</Stack>
-            </AppBar>
-        </Box>
+        <AppBar position="static" color="primary" enableColorOnDark={true}>
+            <Stack direction="row" spacing={3}>
+                {buttons}
+            </Stack>
+        </AppBar>
     );
-};
+}
