@@ -21,10 +21,8 @@ export function TopNavigation() {
         AllRoutes.AuthRoute,
     ].map((route, i) => <AppBarLink key={i} route={route} />);
     return (
-        <AppBar position="static" color="primary" enableColorOnDark={true}>
-            <Stack direction="row" spacing={3}>
-                {buttons}
-            </Stack>
-        </AppBar>
+        <Stack bgcolor="primary.light" direction="row" spacing={3}>
+            {buttons}
+        </Stack>
     );
 }

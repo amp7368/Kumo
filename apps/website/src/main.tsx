@@ -1,11 +1,12 @@
 import 'reflect-metadata';
-
+import { persistState } from '@datorama/akita';
 import { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
 import App from './app/App';
 
-ReactDOM.render(
+persistState();
+render(
     <StrictMode>
         <App />
     </StrictMode>,

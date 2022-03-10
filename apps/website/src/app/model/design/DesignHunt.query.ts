@@ -10,4 +10,4 @@ export class DesignHuntQuery extends Query<DesignHuntState> {
     }
     designHunt: Observable<DesignHuntState> = this.select();
 }
-export const sessionQuery = new DesignHuntQuery(designHuntStore);
+export const designQuery = new DesignHuntQuery(designHuntStore);
