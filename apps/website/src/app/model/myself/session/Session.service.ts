@@ -50,11 +50,10 @@ export class SessionService {
             userId = undefined;
         }
 
-        this.store.update((state) => ({
-            ...state,
-            userId: userId,
+        this.store.update(() => ({
             sessionToken: session.sessionToken,
-            lastRefresh: lastRefresh,
+            userId,
+            lastRefresh,
         }));
     }
 }

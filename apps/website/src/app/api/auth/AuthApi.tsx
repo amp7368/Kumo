@@ -20,15 +20,14 @@ export class AuthAPI extends BaseAPI {
     async login(props: RequestLogin): Promise<ResponseLogin> {
         if (props.username === 'appleptr16' && 'appleptr16' === props.password)
             return Promise.resolve(
-                new ResponseLogin({ sessionToken: v4(), expiration: 999999999 })
-            );
-        else {
-            return Promise.resolve(
                 new ResponseLogin({
-                    sessionToken: '',
-                    expiration: 0,
+                    userId: 1,
+                    sessionToken: v4(),
+                    expiration: 999999999,
                 })
             );
+        else {
+            return Promise.reject();
         }
         return this.newRequest()
             .url('user', 'auth', 'login')

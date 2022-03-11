@@ -47,8 +47,9 @@
             },
             "configurations": {
                 "production": {
+                    "allowedHosts": "wynncloud.com",
                     "buildTarget": "website:build:production",
-                    "hmr": false
+                    "hmr": true
                 }
             }
         },

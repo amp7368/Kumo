@@ -13,12 +13,11 @@ export class SessionQuery extends Query<SessionState> {
     session: Observable<SessionState> = this.select();
 
     isLoggedIn: Observable<boolean> = this.session.pipe(
-        map((sess: SessionState) => {
-            return (
+        map(
+            (sess: SessionState) =>
                 !!sess.sessionToken &&
                 Date.now() - sess.lastRefresh < LOGOUT_TIME
-            );
-        })
+        )
     );
     sessionToken: Observable<string | undefined> = this.session.pipe(
         map((sess: SessionState) => sess.sessionToken)

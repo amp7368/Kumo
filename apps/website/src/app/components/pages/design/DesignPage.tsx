@@ -7,13 +7,15 @@ import { HuntEditor } from './editor/HuntEditor';
 import { ObserveableToElement } from '@appleptr16/elemental';
 import { Optional } from '@misc/for-now';
 import { Hunt } from '../../../model/hunt/Hunt.model';
+import { PrivateRouteInfo } from '../../../routes/PrivateRouteInfo';
 
 function mapToPage(hunt: Optional<Hunt>) {
+    console.log(hunt);
     return hunt ? <HuntEditor hunt={hunt} /> : <DesignDefaultPage />;
 }
 export class DesignPage extends PageWrapper {
     override createRoute(): RouteInfo {
-        return new RouteInfo(this);
+        return new PrivateRouteInfo(this);
     }
 
     override renderMainPage(): JSX.Element {

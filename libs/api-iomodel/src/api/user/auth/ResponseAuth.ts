@@ -1,13 +1,17 @@
 import { AmbrosiaResponse } from '../../AmbrosiaResponse';
 import { SessionBase } from './SessionBase';
 
+export interface ResponseProps extends SessionBase {
+    userId: number;
+}
 export class ResponseAuth extends AmbrosiaResponse {
     sessionToken: string;
     userId: number;
     expiration: number;
-    constructor(session: SessionBase) {
+    constructor(props: ResponseProps) {
         super();
-        this.sessionToken = session.sessionToken;
-        this.expiration = session.expiration;
+        this.sessionToken = props.sessionToken;
+        this.expiration = props.expiration;
+        this.userId = props.userId;
     }
 }

@@ -37,7 +37,7 @@ function SharedWithYou() {
             </Typography>
             <LazyElement
                 onEmitStrategy={LazyOnEmitStrategy.REPLACE}
-                stream={huntQuery.createdByMe$}
+                stream={huntQuery.sharedWithMe$}
                 mappingFn={mapAllHuntsToElement}
             />
         </Stack>

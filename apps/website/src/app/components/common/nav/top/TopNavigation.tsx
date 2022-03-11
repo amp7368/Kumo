@@ -1,4 +1,4 @@
-import { AppBar, Button, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 
 import { RouteInfo } from '../../../../routes/RouteInfo';
 import { AllRoutes } from '../../../../routes/routes';
@@ -19,7 +19,7 @@ export function TopNavigation() {
         AllRoutes.DesignRoute,
         AllRoutes.ProfileRoute,
         AllRoutes.AuthRoute,
-    ].map((route, i) => <AppBarLink key={i} route={route} />);
+    ].map((route) => <AppBarLink key={route.props.link} route={route} />);
     return (
         <Stack bgcolor="primary.light" direction="row" spacing={3}>
             {buttons}
